@@ -1170,6 +1170,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@coinbase/cbpay-js@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@coinbase/cbpay-js/-/cbpay-js-1.7.0.tgz#5b098d70a5928f2689f774d0d5c16ecab6729880"
+  integrity sha512-Y29a18PiJA/JQOsDVRyMipbSArqM5elxy5TRFB+kyfvuMfFa67oesFw1tIgQuaobBF353AO3gFzRLLEEKjP2OA==
+
 "@csstools/normalize.css@*":
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-12.0.0.tgz#a9583a75c3f150667771f30b60d9f059473e62c4"

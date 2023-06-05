@@ -1,0 +1,27 @@
+{
+  "id": "ledger-live-coinbase-pay-app",
+  "name": "Coinbase Pay",
+  "url": "http://localhost:3000",
+  "homepageUrl": "https://www.coinbase.com/cloud/products/pay-sdk",
+  "icon": "",
+  "platform": "all",
+  "apiVersion": "0.0.1",
+  "manifestVersion": "1",
+  "branch": "debug",
+  "categories": ["tools"],
+  "currencies": "*",
+  "content": {
+    "shortDescription": {
+      "en": "Coinbase pay enables buying or transferring crypto from Coinbase exchange to ledger devices."
+    },
+    "description": {
+      "en": "Coinbase pay enables buying or transferring crypto from Coinbase exchange to ledger devices."
+    }
+  },
+  "permissions": [
+    {
+      "method": "*"
+    }
+  ],
+  "domains": ["https://*"]
+}

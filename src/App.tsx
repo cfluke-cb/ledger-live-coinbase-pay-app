@@ -1,11 +1,16 @@
-import { useEffect, useRef } from "react";
-import LedgerLiveApi, { WindowMessageTransport } from "@ledgerhq/live-app-sdk";
-import logo from "./logo.svg";
-import "./App.css";
+import { useEffect, useRef } from 'react';
+import LedgerLiveApi, { WindowMessageTransport } from '@ledgerhq/live-app-sdk';
+import {
+  initOnRamp,
+  InitOnRampParams,
+  CBPayInstanceType,
+} from '@coinbase/cbpay-js';
+import './App.css';
 
 const App = () => {
   // Define the Ledger Live API variable used to call api methods
   const api = useRef<LedgerLiveApi>();
+  const onrampInstance = useRef<CBPayInstanceType>();
 
   // Instantiate the Ledger Live API on component mount
   useEffect(() => {
@@ -32,23 +37,53 @@ const App = () => {
       .catch((error) => console.error({ error }));
 
     console.log({ result });
+    if (!result?.address) {
+      return;
+    }
+
+    const options: InitOnRampParams = {
+      appId: 'getFromCoinbase',
+      widgetParameters: {
+        destinationWallets: [
+          {
+            address: result.address,
+            blockchains: [result.currency],
+          },
+        ],
+      },
+      onSuccess: () => {
+        // handle navigation when user successfully completes the flow
+      },
+      onExit: () => {
+        // handle navigation from dismiss / exit events due to errors
+      },
+      onEvent: (event) => {
+        // event stream
+      },
+      experienceLoggedIn: 'embedded',
+      experienceLoggedOut: 'embedded',
+    };
+
+    // instance.destroy() should be called before initOnramp if there is already an instance.
+    if (onrampInstance.current) {
+      onrampInstance.current?.destroy();
+    }
+
+    initOnRamp(options, (error, instance) => {
+      if (error) {
+        console.error(error);
+      }
+      if (instance) {
+        onrampInstance.current = instance;
+        instance.open();
+      }
+    });
   };
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>Select which account you would like to add funds.</p>
         <button onClick={requestAccount}>Request account</button>
       </header>
     </div>
